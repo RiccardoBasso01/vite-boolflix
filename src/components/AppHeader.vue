@@ -1,18 +1,24 @@
 <script>
+import BaseSearchbar from './BaseSearchbar.vue';
 export default {
     data() {
         return {
 
         }
-    }
+    },
+    components: { BaseSearchbar }
 }
 </script>
 
 <template>
     <header>
-        <a href="#"><img src="https://fontmeme.com/permalink/230705/504e88f1a30f968e13f4cdd854aab685.png"
-                alt="font-netflix">
-        </a>
+        <div class="logo">
+            <a href="#"><img src="https://fontmeme.com/permalink/230705/504e88f1a30f968e13f4cdd854aab685.png"
+                    alt="font-netflix">
+            </a>
+        </div>
+
+        <BaseSearchbar />
     </header>
 </template>
 
