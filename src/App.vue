@@ -37,5 +37,6 @@ export default {
 
 body {
     background-color: $dark-grey;
+    color: white;
 }
 </style>
