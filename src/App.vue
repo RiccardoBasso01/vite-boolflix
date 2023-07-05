@@ -15,7 +15,7 @@ export default {
     components: { AppHeader, AppMain },
     created() {
         axios.get(link).then(res => {
-            console.log(res.data.results)
+            console.table(res.data.results)
             store.trendingMovies = res.data.results
         })
     }

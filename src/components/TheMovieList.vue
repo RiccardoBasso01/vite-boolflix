@@ -11,7 +11,14 @@ export default {
     <section id="trending-movies">
         <ul>
             <li v-for="movie in store.trendingMovies">
-                <a href="#">{{ movie.title }}</a>
+                <div class="card">
+                    <a href="#">
+                        {{ movie.title }}
+                        {{ movie.original_title }}
+                        {{ movie.original_language }}
+                        {{ movie.vote_average }}
+                    </a>
+                </div>
             </li>
         </ul>
     </section>
