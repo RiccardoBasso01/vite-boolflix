@@ -1,7 +1,7 @@
 <script>
 // chiamata axios
 import axios from 'axios';
-const link = 'https://api.themoviedb.org/3/trending/movie/day?api_key=c9010d9998307ed28e3fd7d0c8d75997';
+const link = 'https://api.themoviedb.org/3/trending/movie/day?api_key=c9010d9998307ed28e3fd7d0c8d75997&language=it-IT';
 
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
@@ -15,7 +15,6 @@ export default {
     components: { AppHeader, AppMain },
     created() {
         axios.get(link).then(res => {
-            console.table(res.data.results)
             store.trendingMovies = res.data.results
         })
     }

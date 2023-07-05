@@ -9,9 +9,16 @@ export default {
 </script>
 
 <template>
-    <form action=""></form>
+    <form>
+        <input type="text" placeholder="Cerca...">
+        <button>Invia</button>
+    </form>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/_colors.scss' as *;
+
+button {
+    background-color: $light-grey;
+}
 </style>
