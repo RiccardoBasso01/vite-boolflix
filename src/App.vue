@@ -1,21 +1,29 @@
 <script>
 // chiamata axios
 import axios from 'axios';
-const link = 'https://api.themoviedb.org/3/trending/movie/day?api_key=c9010d9998307ed28e3fd7d0c8d75997&language=it-IT';
 
+// Import di tutti i components necessari
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
+import SearchResults from './components/SearchResults.vue';
+// Imoprt store.js
 import { store } from './data/store.js';
 
 export default {
     data() {
-        return {
-        }
+        return { store }
     },
-    components: { AppHeader, AppMain },
+    components: { AppHeader, AppMain, SearchResults },
     created() {
-        axios.get(link).then(res => {
+        const { baseUrl, api_key, language } = store;
+        const axiosConfig = {
+            params: { api_key, language }
+        };
+        axios.get(`${baseUrl}/trending/movie/day`, axiosConfig).then(res => {
             store.trendingMovies = res.data.results
+        });
+        axios.get(`${baseUrl}/trending/tv/day`, axiosConfig).then(res => {
+            store.trendingTV = res.data.results
         })
     }
 }
@@ -25,9 +33,19 @@ export default {
     <!-- header -->
     <AppHeader />
 
-    <!-- main -->
-    <AppMain />
+    <!-- Sezione Home -->
+    <section id="home-page">
+        <AppMain />
+    </section>
+
+    <!-- Sezione con i risultati di ricerca -->
+    <section id="search-section">
+        <SearchResults />
+    </section>
 </template>
+
+
+
 
 <style lang="scss">
 @use 'assets/scss/style.scss';

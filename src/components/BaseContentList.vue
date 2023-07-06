@@ -1,8 +1,8 @@
 <script>
-import { store } from '../data/store.js'
 export default {
-    data() {
-        return { store }
+
+    props: {
+        containerList: Array
     }
 }
 </script>
@@ -10,11 +10,11 @@ export default {
 <template>
     <section id="trending-movies">
         <ul>
-            <li v-for="movie in store.trendingMovies">
+            <li v-for="movie in containerList">
                 <div class="card">
                     <a href="#">
-                        {{ movie.title }}
-                        {{ movie.original_title }}
+                        {{ movie.title || movie.name }}
+                        {{ movie.original_title || movie.original_name }}
                         {{ movie.original_language }}
                         {{ movie.vote_average }}
                     </a>
