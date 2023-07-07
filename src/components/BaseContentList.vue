@@ -11,7 +11,8 @@ export default {
         flagSrc(flag) {
             const url = new URL(`../assets/img/${flag}.png`, import.meta.url)
             return url.href
-        }
+        },
+        vote: (vote, n) => n <= Math.ceil(vote / 2) ? 'fas' : 'far'
     }
 }
 </script>
@@ -29,7 +30,7 @@ export default {
                     <img v-if="hasFlag(content.original_language)" :src="flagSrc(content.original_language)"
                         :alt="content.original_language">
                     <span v-else>{{ content.original_language }}</span>
-                    {{ content.vote_average }}
+                    <span v-for="n in 5"><font-awesome-icon :icon="[vote(content.vote_average, n), 'star']" /></span>
                 </a>
             </div>
         </li>
