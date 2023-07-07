@@ -10,13 +10,13 @@ export default {
     data() {
         return {
             api,
-            contentFilter: ''
+            contentFilter: '',
         }
     },
     components: { BaseSearchbar },
     computed: {
-        axiosConfig(formText) {
-            const { baseUrl, api_key, language } = api;
+        axiosConfig() {
+            const { api_key, language } = api;
             return {
                 params: {
                     api_key,
@@ -60,8 +60,8 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/scss/_colors.scss' as *;
 
-
 header {
     background-color: $grey;
+    justify-content: space-between;
 }
 </style>

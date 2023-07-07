@@ -3,26 +3,60 @@ export default {
     data() {
         return {
             searchText: '',
+            isVisible: false
         }
     },
     props: {
         placeholder: String
     },
-    emits: ['form-submitted']
+    emits: ['form-submitted'],
+    methods: {
+        showSearchBar() {
+            this.isVisible = !this.isVisible
+        }
+    }
 }
 </script>
 
 <template>
-    <form @submit.prevent="$emit('form-submitted', searchText)">
-        <input v-model="this.searchText" type="text" :placeholder="placeholder || 'Cerca...'">
-        <button>Invia</button>
-    </form>
+    <div class="search">
+        <form @submit.prevent="$emit('form-submitted', searchText)" :class="{ visible: isVisible }">
+            <input v-model="this.searchText" type="text" :placeholder="placeholder || 'Cerca...'">
+        </form>
+
+        <button @click="showSearchBar" :class="{ alone: !isVisible }">
+            <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+        </button>
+    </div>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/_colors.scss' as *;
 
+.search {
+    display: flex;
+    align-items: center;
+}
+
+form {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.5s linear;
+
+    &.visible {
+        width: 300px;
+    }
+}
+
+input {
+    width: 100%;
+}
+
 button {
-    background-color: $light-grey;
+    color: white;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 </style>
