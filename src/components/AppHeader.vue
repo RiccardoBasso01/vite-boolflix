@@ -7,20 +7,35 @@ import BaseSearchbar from './BaseSearchbar.vue';
 import { store, api } from '../data/store.js';
 
 export default {
+    data() {
+        return {
+            api,
+            contentFilter: ''
+        }
+    },
     components: { BaseSearchbar },
-    methods: {
-        // Funzione per filtrre i contenuti
-        getFilterKey(formText) {
+    computed: {
+        axiosConfig(formText) {
             const { baseUrl, api_key, language } = api;
-            const axiosConfig = {
-                params: { api_key, language, query: formText }
+            return {
+                params: {
+                    api_key,
+                    language,
+                    query: this.contentFilter
+                }
             };
-            axios.get(`${baseUrl}/search/movie`, axiosConfig).then(res => {
-                store.searchMovie = res.data.results
+        }
+    },
+    methods: {
+        filterContent(formText) {
+            this.contentFilter = formText;
+            this.getApi('movie', 'searchMovie');
+            this.getApi('tv', 'searchTv');
+        },
+        getApi(array, content) {
+            axios.get(`${api.baseUrl}/search/${array}`, this.axiosConfig).then(res => {
+                store[content] = res.data.results
             });
-            axios.get(`${baseUrl}/search/tv`, axiosConfig).then(res => {
-                store.searchTv = res.data.results
-            })
         }
     }
 }
@@ -33,7 +48,7 @@ export default {
                     alt="logo Boolflix"></a>
         </div>
 
-        <BaseSearchbar :placeholder="'Inserisci i film'" @form-submitted="getFilterKey" />
+        <BaseSearchbar :placeholder="'Inserisci i film'" @form-submitted="filterContent" />
     </header>
 </template>
 
