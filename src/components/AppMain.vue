@@ -11,14 +11,15 @@ export default {
 </script>
 
 <template>
-    <!-- Lista dei film -->
-    <h1>I film del momento</h1>
-    <section id="trending-movies">
-        <BaseContentList :container-list="store.trendingMovies" />
-    </section>
+    <div class="container-l">
 
-    <h1>serie tv</h1>
-    <BaseContentList :container-list="store.trendingTV" />
+        <!-- Lista dei film -->
+        <h1>I film del momento</h1>
+        <BaseContentList :sectionName="'trending-movies'" :container-list="store.trendingMovies" />
+
+        <h1>serie tv</h1>
+        <BaseContentList :sectionName="'trending-series'" :container-list="store.trendingTV" />
+    </div>
 </template>
 
 <style lang="scss" scoped></style>

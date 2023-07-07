@@ -1,0 +1,5 @@
+@mixin border($border-color: grey, $border-radius: 20px) {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
