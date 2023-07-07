@@ -7,15 +7,12 @@ import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 import SearchResults from './components/SearchResults.vue';
 // Imoprt store.js
-import { store } from './data/store.js';
+import { store, api } from './data/store.js';
 
 export default {
-    data() {
-        return { store }
-    },
     components: { AppHeader, AppMain, SearchResults },
     created() {
-        const { baseUrl, api_key, language } = store;
+        const { baseUrl, api_key, language } = api;
         const axiosConfig = {
             params: { api_key, language }
         };

@@ -4,14 +4,14 @@ import axios from 'axios';
 // Import barra di ricerca
 import BaseSearchbar from './BaseSearchbar.vue';
 // Imoprt store.js
-import { store } from '../data/store.js';
+import { store, api } from '../data/store.js';
 
 export default {
     components: { BaseSearchbar },
     methods: {
         // Funzione per filtrre i contenuti
         getFilterKey(formText) {
-            const { baseUrl, api_key, language } = store;
+            const { baseUrl, api_key, language } = api;
             const axiosConfig = {
                 params: { api_key, language, query: formText }
             };

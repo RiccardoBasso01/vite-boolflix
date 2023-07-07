@@ -13,7 +13,10 @@ export default {
 <template>
     <!-- Lista dei film -->
     <h1>I film del momento</h1>
-    <BaseContentList :container-list="store.trendingMovies" />
+    <section id="trending-movies">
+        <BaseContentList :container-list="store.trendingMovies" />
+    </section>
+
     <h1>serie tv</h1>
     <BaseContentList :container-list="store.trendingTV" />
 </template>
