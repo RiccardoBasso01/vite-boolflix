@@ -30,22 +30,40 @@ export default {
         <ul>
             <li v-for="content in containerList">
                 <div class="content-card">
-                    <a href="#">
-                        <div class="img">
+                    <a href="#" class="w-100">
+                        <div class="img w-100">
                             <img v-if="content.poster_path" :src="`http://image.tmdb.org/t/p/w780${content.poster_path}`"
                                 :alt="content.title" :title="content.title">
                             <div v-else class="poster-not-found"></div>
                         </div>
+                        <div class="secondary-img">
+                            <img :src="`http://image.tmdb.org/t/p/w1280${content.backdrop_path}`" :alt="content.title">
+                            <!-- Descrizione -->
+                            <div class="description">
+                                <!-- Titolo e sottotitolo -->
+                                {{ content.title || content.name }}
+                                <div class="subtitle"> {{ subTitle(content) }} </div>
 
-                        <div class="description">
-                            {{ content.title || content.name }}
-                            {{ subTitle(content) }}
-                            <img v-if="hasFlag(content.original_language)" :src="flagSrc(content.original_language)"
-                                :alt="content.original_language">
-                            <span v-else>{{ content.original_language }}</span>
-                            <span v-for="n in 5" :key="n"><font-awesome-icon
-                                    :icon="[vote(content.vote_average, n), 'star']" /></span>
+                                <!-- Lingua e voto -->
+                                <div class="flex mt-2 gap-2">
+                                    <span class="pills">
+                                        <img v-if="hasFlag(content.original_language)"
+                                            :src="flagSrc(content.original_language)" :alt="content.original_language">
+                                        <span v-else>{{ content.original_language }}</span>
+                                    </span>
+
+                                    <span class="pills">
+                                        <span v-for="n in 5" :key="n"><font-awesome-icon
+                                                :icon="[vote(content.vote_average, n), 'star']" /></span>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
+                        <div class="title">
+                            {{ content.title || content.name }}
+                        </div>
+
+
                     </a>
                 </div>
             </li>
@@ -56,10 +74,6 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/scss/_colors.scss' as *;
 @use '../assets/scss/style.scss' as *;
-
-img {
-    width: 200px;
-}
 
 .poster-not-found {
     background-image: url(https://www.themoviedb.org./assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg);
@@ -77,53 +91,103 @@ section {
     overflow: scroll;
 }
 
-.img {
-    @include border;
+
+.title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 5px;
+    color: rgb(162, 162, 162);
 }
 
-
-
-$numberOfCols: 6;
 $spacing: 10px;
 
-
-
-// cols
-
 li {
-    width: calc(100% / $numberOfCols);
     padding: 0 $spacing;
     text-align: center;
 }
 
 // row
 ul {
+    width: 100%;
     display: flex;
     margin: 0, -$spacing;
 }
 
+//_______________________________________________________________________________________________________
 
-@media screen and (min-width: 576px) {
-    $numberOfCols: 3;
 
-    li {
-        width: calc(100% / $numberOfCols);
+.img,
+.secondary-img {
+    @include border;
+    width: 100%;
+    height: 297.6px;
+
+
+}
+
+a {
+    position: relative;
+}
+
+.secondary-img {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s;
+
+
+    img {
+        width: 100%;
+        height: 297.6px;
+        object-fit: cover;
+        position: relative;
+        filter: brightness(0.70);
     }
 }
 
-@media screen and (min-width: 768px) {
-    $numberOfCols: 4;
+.content-card {
+    width: 200px;
+    overflow: hidden;
+    transition: width 1s;
+}
 
-    li {
-        width: calc(100% / $numberOfCols);
+li:hover .content-card {
+    width: 400px;
+
+    .secondary-img {
+        opacity: 1;
     }
 }
 
-@media screen and (min-width: 992px) {
-    $numberOfCols: 6;
+.description {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 
-    li {
-        width: calc(100% / $numberOfCols);
+    font-size: var(--font-size-m);
+    text-align: start;
+    text-shadow: 1px 1px 1px black;
+
+    img {
+        width: 20px;
+        height: auto;
     }
+
+}
+
+.subtitle {
+    font-size: var(--font-size-xs);
+
+}
+
+.pills {
+    padding: 10px;
+    @include border;
+    background-color: $grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
