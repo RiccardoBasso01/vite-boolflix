@@ -11,6 +11,7 @@ export default {
         return {
             api,
             contentFilter: '',
+            searchedText: ''
         }
     },
     components: { BaseSearchbar },
@@ -27,15 +28,21 @@ export default {
         }
     },
     methods: {
-        filterContent(formText) {
-            this.contentFilter = formText;
+        filterContent() {
             this.getApi('movie', 'searchMovie');
             this.getApi('tv', 'searchTv');
+            store.showLoader = false;
+            this.searchedText = this.contentFilter
         },
         getApi(array, content) {
             axios.get(`${api.baseUrl}/search/${array}`, this.axiosConfig).then(res => {
                 store[content] = res.data.results
             });
+        },
+        isSearching(formText) {
+            this.contentFilter = formText;
+            formText ? store.inputText = true : store.inputText = false;
+            if (this.contentFilter != this.searchedText) store.showLoader = true
         }
     }
 }
@@ -48,7 +55,8 @@ export default {
                     alt="logo Boolflix"></a>
         </div>
 
-        <BaseSearchbar :placeholder="'Inserisci i film'" @form-submitted="filterContent" />
+        <BaseSearchbar :placeholder="'Cerca titoli, film o serie TV'" @form-submitted="filterContent"
+            @text-change="isSearching" />
     </header>
 </template>
 

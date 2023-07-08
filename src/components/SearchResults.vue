@@ -13,11 +13,11 @@ export default {
 </script>
 
 <template>
-    <h1>RISULTATI RICERCA</h1>
+    <h2>Risultati ricerca</h2>
     <div>
         <h2>Film </h2>
         <BaseContentList :container-list="store.searchMovie" />
-        <h2>Tv </h2>
+        <h2>Serie TV </h2>
         <BaseContentList :container-list="store.searchTv" />
     </div>
 </template>

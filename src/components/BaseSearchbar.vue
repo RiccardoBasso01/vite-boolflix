@@ -9,7 +9,7 @@ export default {
     props: {
         placeholder: String
     },
-    emits: ['form-submitted'],
+    emits: ['form-submitted', 'text-change'],
     methods: {
         showSearchBar() {
             this.isVisible = !this.isVisible
@@ -20,8 +20,9 @@ export default {
 
 <template>
     <div class="search">
-        <form @submit.prevent="$emit('form-submitted', searchText)" :class="{ visible: isVisible }">
-            <input v-model="this.searchText" type="text" :placeholder="placeholder || 'Cerca...'">
+        <form @submit.prevent="$emit('form-submitted')" :class="{ visible: isVisible }">
+            <input @keyup="$emit('text-change', searchText)" v-model="this.searchText" type="text"
+                :placeholder="placeholder || 'Cerca...'">
         </form>
 
         <button @click="showSearchBar" :class="{ alone: !isVisible }">

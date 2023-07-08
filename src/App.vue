@@ -6,11 +6,15 @@ import axios from 'axios';
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 import SearchResults from './components/SearchResults.vue';
+import SearchLoader from './components/SearchLoader.vue';
 // Imoprt store.js
 import { store, api } from './data/store.js';
 
 export default {
-    components: { AppHeader, AppMain, SearchResults },
+    data() {
+        return { store }
+    },
+    components: { AppHeader, AppMain, SearchResults, SearchLoader },
     created() {
         const { baseUrl, api_key, language } = api;
         const axiosConfig = {
@@ -31,13 +35,14 @@ export default {
     <AppHeader />
 
     <!-- Sezione Home -->
-    <section id="home-page">
+    <section v-if="!store.inputText" id="home-page">
         <AppMain />
     </section>
 
     <!-- Sezione con i risultati di ricerca -->
-    <section id="search-section">
-        <SearchResults />
+    <section v-else id="search-section">
+        <SearchLoader v-if="store.showLoader" />
+        <SearchResults v-else />
     </section>
 </template>
 

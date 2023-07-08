@@ -4,6 +4,9 @@ export const store = reactive ({
     trendingTV: [],
     searchMovie: [],
     searchTv: [],
+
+    inputText: false,
+    showLoader: true,
 });
 
 export const api = {

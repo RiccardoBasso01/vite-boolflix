@@ -34,10 +34,13 @@ export default {
                         <div class="img w-100">
                             <img v-if="content.poster_path" :src="`http://image.tmdb.org/t/p/w780${content.poster_path}`"
                                 :alt="content.title" :title="content.title">
-                            <div v-else class="poster-not-found"></div>
+                            <div v-else class="image-not-found"></div>
                         </div>
                         <div class="secondary-img">
-                            <img :src="`http://image.tmdb.org/t/p/w1280${content.backdrop_path}`" :alt="content.title">
+                            <img v-if="content.backdrop_path"
+                                :src="`http://image.tmdb.org/t/p/w1280${content.backdrop_path}`" :alt="content.title">
+                            <div v-else class="image-not-found"></div>
+
                             <!-- Descrizione -->
                             <div class="description">
                                 <!-- Titolo e sottotitolo -->
@@ -75,9 +78,9 @@ export default {
 @use '../assets/scss/_colors.scss' as *;
 @use '../assets/scss/style.scss' as *;
 
-.poster-not-found {
+.image-not-found {
     background-image: url(https://www.themoviedb.org./assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg);
-    width: 200px;
+    width: 100%;
     height: 300px;
     background-repeat: no-repeat;
     background-size: 100px;
