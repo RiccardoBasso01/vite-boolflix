@@ -43,6 +43,9 @@ export default {
             this.contentFilter = formText;
             formText ? store.inputText = true : store.inputText = false;
             if (this.contentFilter != this.searchedText) store.showLoader = true
+        },
+        goHomePage() {
+            store.inputText = false;
         }
     }
 }
@@ -51,7 +54,8 @@ export default {
 <template>
     <header>
         <div class="logo">
-            <a href="#"><img src="https://fontmeme.com/permalink/230705/504e88f1a30f968e13f4cdd854aab685.png"
+            <a @click="goHomePage" href="#"><img
+                    src="https://fontmeme.com/permalink/230705/504e88f1a30f968e13f4cdd854aab685.png"
                     alt="logo Boolflix"></a>
         </div>
 
