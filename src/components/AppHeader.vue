@@ -53,11 +53,8 @@ export default {
 
 <template>
     <header>
-        <div class="logo">
-            <a @click="goHomePage" href="#"><img
-                    src="https://fontmeme.com/permalink/230705/504e88f1a30f968e13f4cdd854aab685.png"
-                    alt="logo Boolflix"></a>
-        </div>
+        <a @click="goHomePage" href="#"><img
+                src="https://fontmeme.com/permalink/230705/504e88f1a30f968e13f4cdd854aab685.png" alt="logo Boolflix"></a>
 
         <BaseSearchbar :placeholder="'Cerca titoli, film o serie TV'" @form-submitted="filterContent"
             @text-change="isSearching" />
@@ -75,5 +72,11 @@ export default {
 header {
     background-color: $grey;
     justify-content: space-between;
+    height: 90px;
+    padding: 0 20px;
+}
+
+img {
+    width: 200px;
 }
 </style>

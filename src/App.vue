@@ -7,14 +7,18 @@ import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 import SearchResults from './components/SearchResults.vue';
 import SearchLoader from './components/SearchLoader.vue';
+import TheIntro from './components/TheIntro.vue';
 // Imoprt store.js
 import { store, api } from './data/store.js';
 
 export default {
     data() {
-        return { store }
+        return {
+            store,
+            showIntro: true
+        }
     },
-    components: { AppHeader, AppMain, SearchResults, SearchLoader },
+    components: { AppHeader, AppMain, SearchResults, SearchLoader, TheIntro },
     created() {
         const { baseUrl, api_key, language } = api;
         const axiosConfig = {
@@ -25,12 +29,23 @@ export default {
         });
         axios.get(`${baseUrl}/trending/tv/day`, axiosConfig).then(res => {
             store.trendingTV = res.data.results
-        })
+        });
+    },
+    mounted() {
+        this.showIntro = true
+    },
+    methods: {
+        goToSite() {
+            this.showIntro = false
+        }
     }
 }
 </script>
 
 <template>
+    <!-- Intro -->
+    <TheIntro v-if="showIntro" @sign-in="goToSite" />
+
     <!-- header -->
     <AppHeader />
 
@@ -57,5 +72,6 @@ export default {
 body {
     background-color: $dark-grey;
     color: white;
+    height: 100vh;
 }
 </style>

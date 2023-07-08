@@ -11,14 +11,21 @@ export default {
 </script>
 
 <template>
-    <div class="container-l">
-        <!-- Lista dei film -->
-        <h1>I film del momento</h1>
-        <BaseContentList :sectionName="'trending-movies'" :container-list="store.trendingMovies" />
+    <main>
+        <div class="container-l">
+            <!-- Lista dei film -->
+            <h1>I film del momento</h1>
+            <BaseContentList :sectionName="'trending-movies'" :container-list="store.trendingMovies" />
 
-        <h1>Le serie TV del momento</h1>
-        <BaseContentList :sectionName="'trending-series'" :container-list="store.trendingTV" />
-    </div>
+            <h1>Le serie TV del momento</h1>
+            <BaseContentList :sectionName="'trending-series'" :container-list="store.trendingTV" />
+        </div>
+    </main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+main {
+    overflow: scroll;
+    height: calc(100vh - 90px);
+}
+</style>
