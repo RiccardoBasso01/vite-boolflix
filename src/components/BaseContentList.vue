@@ -6,7 +6,7 @@ export default {
     },
     methods: {
         hasFlag(flag) {
-            const availableFlag = ['it', 'en']
+            const availableFlag = ['de', 'es', 'hi', 'ja', 'ru', 'it', 'en', 'fr']
             return availableFlag.includes(flag)
         },
         flagSrc(flag) {
@@ -48,8 +48,8 @@ export default {
                                 <div class="subtitle"> {{ subTitle(content) }} </div>
 
                                 <!-- Lingua e voto -->
-                                <div class="flex mt-2 gap-2">
-                                    <span class="pills">
+                                <div class="center-Y mt-2 gap-2">
+                                    <span>
                                         <img v-if="hasFlag(content.original_language)"
                                             :src="flagSrc(content.original_language)" :alt="content.original_language">
                                         <span v-else>{{ content.original_language }}</span>
@@ -86,6 +86,7 @@ export default {
     background-size: 100px;
     background-position: center;
     background-color: $light-grey;
+    filter: brightness(0.80);
 }
 
 
@@ -117,9 +118,6 @@ ul {
     margin: 0, -$spacing;
 }
 
-//_______________________________________________________________________________________________________
-
-
 .img,
 .secondary-img {
     @include border;
@@ -141,7 +139,7 @@ a {
     transition: opacity 0.3s;
 
 
-    img {
+    >img {
         width: 100%;
         height: 297.6px;
         object-fit: cover;
@@ -174,7 +172,7 @@ li:hover .content-card {
     text-shadow: 1px 1px 1px black;
 
     img {
-        width: 20px;
+        width: 30px;
         height: auto;
     }
 
